@@ -11,16 +11,16 @@
 |
 */
 
-Route::view('/','home');
+Route::view('/', 'home');
 // Route::get('/', function () {
 //     return view('welcome');
 // });
 
-Route::view('contact','contact');
+Route::view('contact', 'contact');
 // Route::get('contact', function() {
 //     return view('contact');
 // });
-Route::view('about','about');
+Route::view('about', 'about');
 // Route::get('about', function(){
 //     return view('about');
 // });
@@ -33,5 +33,6 @@ Route::view('about','about');
 //     ];
 //     return view('internals.customers', ['key' => $customers]);
 // });
-Route::get('customers', 'CustomersController@list');
+Route::get('customers', 'CustomersController@index');
+Route::get('customers/create', 'CustomersController@create');
 Route::post('customers', 'CustomersController@store');
