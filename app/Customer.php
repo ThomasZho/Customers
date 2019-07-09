@@ -14,6 +14,20 @@ class Customer extends Model
     //Guarded Example: empty array nothing to be guarded (mass assignments to everything)
     protected $guarded = [];
 
+    // To set default for a model
+    protected $attributes = [
+        'active' => 1
+    ];
+    public function getActiveAttribute($attribute)
+    {
+        // return [
+        //     0 => 'Inactive',
+        //     1 => 'Active',
+        // ][$attribute];
+
+        return $this->activeOptions()[$attribute];
+    }
+
     public function scopeActive($query)
     {
         return $query->where('active', 1);
@@ -27,5 +41,13 @@ class Customer extends Model
     public function company()
     {
         return $this->belongsTo(Company::class);
+    }
+
+    public function activeOptions()
+    {
+        return [
+            0 => 'Inactive',
+            1 => 'Active',
+        ];
     }
 }

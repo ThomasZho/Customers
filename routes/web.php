@@ -36,3 +36,6 @@ Route::view('about', 'about');
 Route::get('customers', 'CustomersController@index');
 Route::get('customers/create', 'CustomersController@create');
 Route::post('customers', 'CustomersController@store');
+Route::get('customers/{something}', 'CustomersController@show');
+Route::patch('customers/{customer}', 'CustomersController@update');
+Route::get('customers/{customer}/edit', 'CustomersController@edit');
