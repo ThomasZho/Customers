@@ -9,6 +9,11 @@ use Illuminate\Http\RedirectResponse;
 
 class CustomersController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index']);
+    }
     public function index()
     {
         $customers = Customer::all();
@@ -32,6 +37,7 @@ class CustomersController extends Controller
         $customer = new Customer();
         return view('customers.create', compact('companies', 'customer'));
     }
+
     public function store()
     {
         // $data = request()->validate([
@@ -63,9 +69,8 @@ class CustomersController extends Controller
     // }
 
     //Route Model Binding
-    public function show(Customer $something)
+    public function show(Customer $customer)
     {
-        $customer = $something;
         return view('customers.show', compact('customer'));
     }
 
@@ -80,6 +85,14 @@ class CustomersController extends Controller
 
         return redirect('customers/' . $customer->id);
     }
+
+    public function destroy(Customer $customer)
+    {
+        $customer->delete();
+
+        return redirect('customers');
+    }
+
     private function validateRequest()
     {
         return request()->validate([

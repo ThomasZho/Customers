@@ -16,10 +16,13 @@ Route::view('/', 'home');
 //     return view('welcome');
 // });
 
-Route::view('contact', 'contact');
+// Route::view('contact', 'contact');
 // Route::get('contact', function() {
 //     return view('contact');
 // });
+Route::get('contact', 'ContactFormController@create');
+Route::post('contact', 'ContactFormController@store');
+
 Route::view('about', 'about');
 // Route::get('about', function(){
 //     return view('about');
@@ -33,9 +36,19 @@ Route::view('about', 'about');
 //     ];
 //     return view('internals.customers', ['key' => $customers]);
 // });
-Route::get('customers', 'CustomersController@index');
-Route::get('customers/create', 'CustomersController@create');
-Route::post('customers', 'CustomersController@store');
-Route::get('customers/{something}', 'CustomersController@show');
-Route::patch('customers/{customer}', 'CustomersController@update');
-Route::get('customers/{customer}/edit', 'CustomersController@edit');
+
+
+// Route::get('customers', 'CustomersController@index');
+// Route::get('customers/create', 'CustomersController@create');
+// Route::post('customers', 'CustomersController@store');
+// Route::get('customers/{customer}', 'CustomersController@show');
+// Route::patch('customers/{customer}', 'CustomersController@update');
+// Route::get('customers/{customer}/edit', 'CustomersController@edit');
+// Route::delete('customers/{customer}', 'CustomersController@destroy');
+
+// Suffit car on a suivi les conventions de nom de fonction/route dans le controller
+Route::resource('customers', 'CustomersController');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
